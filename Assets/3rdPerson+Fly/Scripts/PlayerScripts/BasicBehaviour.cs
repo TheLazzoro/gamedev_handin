@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 // This class manages which player behaviour is active or overriding, and call its local functions.
