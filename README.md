@@ -1,3 +1,3 @@
 # gamedev_handin_1
 
-Football Single-Player game. Pushing a rigid body ball into the goal's tcollision trigger adds a point to the scoreboard UI.
+Football Single-Player game. Features a remodeled Shadow guy, a rigid body ball and two goals.
