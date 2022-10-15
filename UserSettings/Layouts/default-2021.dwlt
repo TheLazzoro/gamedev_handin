@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 492}
   m_MaxSize: {x: 10000, y: 10000}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 104
+  controlID: 54
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 17
+  controlID: 27
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -309,9 +309,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: c0090000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 38fbffff
+      m_ExpandedIDs: d8ceffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -419,22 +419,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/3rdPerson+Fly/Scripts/PlayerScripts
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/3rdPerson+Fly/Scripts/PlayerScripts
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: E:\Repositories\Datamatiker 4 Semester\Game Development\gamedev_handin_1
+  m_LastProjectPath: C:\Users\Nikolaj\Desktop\Dev\CPHBusiness\Fourth semester\GameDev\gamedev_handin_1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 605c0000
-    m_LastClickedID: 23648
-    m_ExpandedIDs: 00000000285c00002a5c00002c5c00002e5c0000505c000000ca9a3b
+    m_SelectedIDs: e4870000
+    m_LastClickedID: 34788
+    m_ExpandedIDs: 00000000e487000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -462,7 +462,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000285c00002a5c00002c5c00002e5c0000
+    m_ExpandedIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: e464000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -837,9 +837,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 46.408104, y: 92.12664, z: 350.4671}
+    m_Target: {x: 43.076366, y: 105.07357, z: 359.43127}
     speed: 2
-    m_Value: {x: 46.408104, y: 92.12664, z: 350.4671}
+    m_Value: {x: 43.076366, y: 105.07357, z: 359.43127}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -886,9 +886,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.17060256, y: 0.7282692, z: -0.19592035, w: -0.63408816}
+    m_Target: {x: -0.054794867, y: 0.9135507, z: -0.13135234, w: -0.38093722}
     speed: 2
-    m_Value: {x: -0.17060256, y: 0.7282692, z: -0.19592035, w: -0.6340882}
+    m_Value: {x: -0.05459931, y: 0.9141467, z: -0.13143808, w: -0.37957713}
   m_Size:
     m_Target: 12.124355
     speed: 2
