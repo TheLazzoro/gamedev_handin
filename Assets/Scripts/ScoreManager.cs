@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
 
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
 
     int scoreTeam1 = 0;
     int scoreTeam2 = 0;
