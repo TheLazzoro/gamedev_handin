@@ -5,6 +5,7 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager instance;
 
     public TextMeshProUGUI scoreText;
 
@@ -12,15 +13,20 @@ public class ScoreManager : MonoBehaviour
     int scoreTeam2 = 0;
 
 
+    private void Awake()    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         scoreText.text = scoreTeam1.ToString() + " - " + scoreTeam2.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+
+    //TODO: Refactor these 2 methods when we add teams
+    public void AddPoint_Team1()  {
+        scoreTeam1 += 1;
         
     }
 }
