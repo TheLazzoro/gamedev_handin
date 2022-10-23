@@ -18,10 +18,10 @@ public class GoalScored : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(other.tag != "Ball")
-            return;
-
-        Debug.Log("ball entered");
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != "Ball") return;
+        Debug.Log("Scored a goal on " + gameObject.tag);
+        FindObjectOfType<ScoreManager>().AddPointToTeam(gameObject.tag);
     }
 }
