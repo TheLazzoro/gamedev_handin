@@ -24,14 +24,10 @@ public class ScoreManager : MonoBehaviour
     }
 
 
-    //TODO: Refactor these 2 methods when we add teams
-    public void AddPoint_Team1()  {
-        scoreTeam1 += 1;
-        scoreText.text = scoreTeam1.ToString() + " - " + scoreTeam2.ToString();
-    }
-    //TODO: Refactor these 2 methods when we add teams
-    public void AddPoint_Team2()  {
-        scoreTeam2 += 1;
+    public void AddPointToTeam(string GoalTag)
+    {
+        if (GoalTag == "Goal1") scoreTeam1++;
+        else scoreTeam2++;
         scoreText.text = scoreTeam1.ToString() + " - " + scoreTeam2.ToString();
     }
 }
