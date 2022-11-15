@@ -29,6 +29,7 @@ public class Goal : MonoBehaviour
         activated = false; // TODO: Remember to re-activate the goal on round reset.
         Debug.Log("Scored a goal on " + teamName);
         FindObjectOfType<ScoreManager>().AddPointToTeam(gameObject.tag);
+        FindObjectOfType<SFXHandler>().playSFX("applause", 0.5f);
 
         // Explosion
         var ballEx = other.GetComponent<Explosion>();
