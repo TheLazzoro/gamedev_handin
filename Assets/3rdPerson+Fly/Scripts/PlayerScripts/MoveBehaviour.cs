@@ -3,9 +3,9 @@
 // MoveBehaviour inherits from GenericBehaviour. This class corresponds to basic walk and run behaviour, it is the default behaviour.
 public class MoveBehaviour : GenericBehaviour
 {
-	public float walkSpeed = 5.0f;                 // Default walk speed.
-	public float runSpeed = 5.0f;                   // Default run speed.
-	public float sprintSpeed = 5.0f;                // Default sprint speed.
+	public float walkSpeed = 0.15f;                 // Default walk speed.
+	public float runSpeed = 1.0f;                   // Default run speed.
+	public float sprintSpeed = 2.0f;                // Default sprint speed.
 	public float speedDampTime = 0.1f;              // Default damp time to change the animations based on current speed.
 	public string jumpButton = "Jump";              // Default jump button.
 	public float jumpHeight = 1.5f;                 // Default jump height.

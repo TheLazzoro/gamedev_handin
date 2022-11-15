@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class ScoreManager : MonoBehaviour
-{   
+{
     public static ScoreManager instance;
     public TextMeshProUGUI scoreText;
 
@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
     int scoreTeam2 = 0;
 
 
-    private void Awake()    {
+    private void Awake() {
         instance = this;
     }
 
@@ -28,6 +28,5 @@ public class ScoreManager : MonoBehaviour
         if (GoalTag == "Goal1") scoreTeam1++;
         else scoreTeam2++;
         scoreText.text = scoreTeam1.ToString() + " - " + scoreTeam2.ToString();
-        //source.Play(clip);
     }
 }
