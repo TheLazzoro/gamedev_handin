@@ -6,14 +6,13 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-
     public TextMeshProUGUI scoreText;
 
     static int scoreTeam1 = 0;
     static int scoreTeam2 = 0;
 
 
-    private void Awake()    {
+    private void Awake() {
         instance = this;
     }
 
