@@ -31,6 +31,8 @@ public class Goal : MonoBehaviour
         FindObjectOfType<ScoreManager>().AddPointToTeam(gameObject.tag);
 
         // Explosion
+        var ballEx = other.GetComponent<Explosion>();
+        ballEx.TriggerExplosion();
         var affectedObjects = Physics.OverlapSphere(transform.position, OnScore_explosionRadius);
         foreach (var obj in affectedObjects)
         {
