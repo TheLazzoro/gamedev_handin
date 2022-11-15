@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddPointToTeam(string GoalTag)
     {
-        if (GoalTag == "Goal1") scoreTeam1++;
+        if (GoalTag == "Team 2") scoreTeam1++;
         else scoreTeam2++;
         scoreText.text = scoreTeam1.ToString() + " - " + scoreTeam2.ToString();
     }
