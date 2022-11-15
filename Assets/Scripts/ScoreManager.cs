@@ -9,8 +9,8 @@ public class ScoreManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
 
-    int scoreTeam1 = 0;
-    int scoreTeam2 = 0;
+    static int scoreTeam1 = 0;
+    static int scoreTeam2 = 0;
 
 
     private void Awake()    {

@@ -43,5 +43,7 @@ public class Goal : MonoBehaviour
             rigidBody.AddExplosionForce(OnScore_force, ball.position, OnScore_explosionRadius);
             Debug.Log(rigidBody.ToString());
         }
+        RestartScene restartscene = new RestartScene();
+        restartscene.ResetScene();
     }
 }
