@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity;
 
 public class Goal : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Goal : MonoBehaviour
     [SerializeField] float OnScore_force = 7000f;
     GameObject agent;
     bool activated;
+    float pauseTime = 3f;
 
 
     void Start()
@@ -18,8 +20,14 @@ public class Goal : MonoBehaviour
     }
 
     void Update()
-    {
-
+    {   
+        if (activated == false) {
+        pauseTime -= Time.deltaTime;
+            if (pauseTime <= 0) {
+                RestartScene restartscene = new RestartScene();
+                restartscene.ResetScene();
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

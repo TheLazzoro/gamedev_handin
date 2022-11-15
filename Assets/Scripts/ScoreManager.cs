@@ -8,8 +8,8 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
     public TextMeshProUGUI scoreText;
 
-    int scoreTeam1 = 0;
-    int scoreTeam2 = 0;
+    static int scoreTeam1 = 0;
+    static int scoreTeam2 = 0;
 
 
     private void Awake() {
@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddPointToTeam(string GoalTag)
     {
-        if (GoalTag == "Goal1") scoreTeam1++;
+        if (GoalTag == "Team 2") scoreTeam1++;
         else scoreTeam2++;
         scoreText.text = scoreTeam1.ToString() + " - " + scoreTeam2.ToString();
     }
