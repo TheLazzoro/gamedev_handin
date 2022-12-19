@@ -12,11 +12,16 @@ public class Goal : MonoBehaviour
     bool activated;
     float pauseTime = 3f;
 
+    private static readonly float SlowMotionTime = 1;
+    private static float SlowMotionTime_Left;
+    private static float SlowDownFactor = 0.2f;
+    private static float FixedDeltaTime;
 
     void Start()
     {
         agent = GetComponent<GameObject>();
         activated = true;
+        FixedDeltaTime = Time.fixedDeltaTime;
     }
 
     void Update()
@@ -28,6 +33,14 @@ public class Goal : MonoBehaviour
                 restartscene.ResetScene();
             }
         }
+
+        if (SlowMotionTime_Left < 0)
+        {
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = FixedDeltaTime;
+        }
+        else
+            SlowMotionTime_Left -= Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +51,10 @@ public class Goal : MonoBehaviour
         Debug.Log("Scored a goal on " + teamName);
         FindObjectOfType<ScoreManager>().AddPointToTeam(gameObject.tag);
         FindObjectOfType<SFXHandler>().playSFX("applause", 0.5f);
+
+        SlowMotionTime_Left = SlowMotionTime;
+        Time.timeScale = SlowDownFactor;
+        Time.fixedDeltaTime = SlowDownFactor * 0.02f;
 
         // Explosion
         var ballEx = other.GetComponent<Explosion>();
@@ -52,5 +69,7 @@ public class Goal : MonoBehaviour
             rigidBody.AddExplosionForce(OnScore_force, ball.position, OnScore_explosionRadius);
             Debug.Log(rigidBody.ToString());
         }
+
+        ball.gameObject.SetActive(false);
     }
 }
