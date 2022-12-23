@@ -6,8 +6,10 @@ using Unity;
 public class Goal : MonoBehaviour
 {
     [SerializeField] string teamName;
-    [SerializeField] float OnScore_explosionRadius = 300f;
-    [SerializeField] float OnScore_force = 7000f;
+    [SerializeField] GameObject yeetArea;
+    private CarYeeter carYeeter;
+    private List<Rigidbody> affectedObjects;
+
     GameObject agent;
     bool activated;
     float pauseTime = 3f;
@@ -22,6 +24,7 @@ public class Goal : MonoBehaviour
         agent = GetComponent<GameObject>();
         activated = true;
         FixedDeltaTime = Time.fixedDeltaTime;
+        carYeeter = yeetArea.GetComponent<CarYeeter>();
     }
 
     void Update()
@@ -59,16 +62,7 @@ public class Goal : MonoBehaviour
         // Explosion
         var ballEx = other.GetComponent<Explosion>();
         ballEx.TriggerExplosion();
-        var affectedObjects = Physics.OverlapSphere(transform.position, OnScore_explosionRadius);
-        foreach (var obj in affectedObjects)
-        {
-            var rigidBody = obj.GetComponent<Rigidbody>();
-            if (rigidBody == null || obj.tag == "Ball")
-                continue;
-
-            rigidBody.AddExplosionForce(OnScore_force, ball.position, OnScore_explosionRadius);
-            Debug.Log(rigidBody.ToString());
-        }
+        carYeeter.Yeet();
 
         ball.gameObject.SetActive(false);
     }
