@@ -17,6 +17,15 @@ public class CarController : MonoBehaviour
     public float maxSteerAngle = 30;
     public float motorForce = 50;
 
+    public Transform centerOfMass;
+    private Rigidbody rigidbody;
+
+    void Start()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.centerOfMass = centerOfMass.localPosition;
+    }
+
 
     public void GetInput()  {
         horizontalInput = Input.GetAxis("Horizontal");
