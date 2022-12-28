@@ -9,7 +9,8 @@ public class Explosion : MonoBehaviour
 
     void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
+        GameObject sparks = GameObject.Find("Sparks");
+        particleSystem = sparks.GetComponent<ParticleSystem>();
         particleSystem.Stop();
     }
 
