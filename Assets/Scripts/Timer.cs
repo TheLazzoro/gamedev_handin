@@ -11,7 +11,6 @@ public class Timer : MonoBehaviour
     public bool timerIsRunning;
     public TextMeshProUGUI timeText;
     public static event Action OnTimerEnd;
-    private bool TimerDidEnd = false;
 
     private void Start()
     {
@@ -27,10 +26,9 @@ public class Timer : MonoBehaviour
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
             }
-            else if(!TimerDidEnd) // Should only fire once
+            else if(timerIsRunning) // Should only fire once
             {
                 Debug.Log("Time has run out!");
-                TimerDidEnd = true;
                 timeRemaining = 0;
                 timerIsRunning = false;
                 OnTimerEnd?.Invoke();
