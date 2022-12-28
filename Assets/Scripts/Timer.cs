@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Timer : MonoBehaviour
 {
     public static float timeRemaining = 300;
-    public bool timerIsRunning = false;
+    public bool timerIsRunning;
     public TextMeshProUGUI timeText;
+    public static event Action OnTimerEnd;
+    private bool TimerDidEnd = false;
+
     private void Start()
     {
         // Starts the timer automatically
@@ -23,11 +27,13 @@ public class Timer : MonoBehaviour
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
             }
-            else
+            else if(!TimerDidEnd) // Should only fire once
             {
                 Debug.Log("Time has run out!");
+                TimerDidEnd = true;
                 timeRemaining = 0;
                 timerIsRunning = false;
+                OnTimerEnd?.Invoke();
             }
         }
     }
