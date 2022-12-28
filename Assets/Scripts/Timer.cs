@@ -7,7 +7,7 @@ using System;
 
 public class Timer : MonoBehaviour
 {
-    public static float timeRemaining = 300;
+    public static float timeRemaining = 1;
     public bool timerIsRunning;
     public TextMeshProUGUI timeText;
     public static event Action OnTimerEnd;
