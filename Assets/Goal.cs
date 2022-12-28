@@ -65,7 +65,6 @@ public class Goal : MonoBehaviour
         carYeeter.Yeet();
 
         // Find the actual ball and hide that (keep particles)
-        Debug.Log(GameObject.Find("Soccer Ball"));
         GameObject.Find("Soccer Ball").SetActive(false);
     }
 }
