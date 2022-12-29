@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BallTriggerSFX : MonoBehaviour
 {
-
     public AudioSource audioSource;
     public AudioClip hit;
     public AudioClip explosion;
