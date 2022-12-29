@@ -6,6 +6,8 @@ public class BallTriggerSFX : MonoBehaviour
 {
 
     public AudioSource audioSource;
+    public AudioClip hit;
+    public AudioClip explosion;
     
     void Start()
     {
@@ -19,6 +21,11 @@ public class BallTriggerSFX : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name != "GoalTriggerArea") audioSource.Play();
+        if (other.name != "GoalTriggerArea")
+        {
+            audioSource.PlayOneShot(hit);
+        } else {
+            audioSource.PlayOneShot(explosion);
+        }
     }
 }
