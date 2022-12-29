@@ -24,7 +24,6 @@ public class CarController : MonoBehaviour
     private readonly float flipThreshold = 2f;
 
     public AudioSource audioSource;
-    public AudioClip engineIdle;
 
     private float carSpeed = 0;
 
@@ -34,7 +33,6 @@ public class CarController : MonoBehaviour
         rigidbody.centerOfMass = centerOfMass.localPosition;
         upsideDownTimer = flipThreshold;
         
-        //audioSource.clip = engineIdle;
         audioSource.volume = 0.15f;
         audioSource.loop = true;
         audioSource.Play();
@@ -73,8 +71,6 @@ public class CarController : MonoBehaviour
         var carCappedSpeed = carSpeed > 20 ? 20 : carSpeed;
         audioSource.pitch = 1 + (carCappedSpeed/20);
     }
-
-
 
     public void GetInput()  {
         horizontalInput = Input.GetAxis("Horizontal");
@@ -115,7 +111,4 @@ public class CarController : MonoBehaviour
         Accelerate();
         UpdateWheelPositions();
     }
-
-
-
 }
