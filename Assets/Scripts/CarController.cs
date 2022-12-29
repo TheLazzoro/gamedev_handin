@@ -23,12 +23,21 @@ public class CarController : MonoBehaviour
     private float upsideDownTimer;
     private readonly float flipThreshold = 2f;
 
+    public AudioSource audioSource;
+    public AudioClip engineIdle;
+
+    private float carSpeed = 0;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = centerOfMass.localPosition;
         upsideDownTimer = flipThreshold;
+        
+        //audioSource.clip = engineIdle;
+        audioSource.volume = 0.15f;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     void Update()
@@ -54,7 +63,17 @@ public class CarController : MonoBehaviour
             transform.Translate(up);
             transform.rotation = rot;
         }
+
+        carSpeed = (rigidbody.velocity.magnitude > 0) ? rigidbody.velocity.magnitude : 0;
+
+        // The car goes up to about 24 speed max, but in most cases stays around 20.
+        // To simplify we're capping the calculated speed for pitch changes to 20,
+        // and dividing by it to get a pitch change between 0 and 1.
+        // Adding 1 due to it being the default pitch, meaning it goes between 1 and 2.
+        var carCappedSpeed = carSpeed > 20 ? 20 : carSpeed;
+        audioSource.pitch = 1 + (carCappedSpeed/20);
     }
+
 
 
     public void GetInput()  {

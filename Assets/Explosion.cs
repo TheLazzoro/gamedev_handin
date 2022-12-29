@@ -12,6 +12,7 @@ public class Explosion : MonoBehaviour
         GameObject sparks = GameObject.Find("Sparks");
         particleSystem = sparks.GetComponent<ParticleSystem>();
         particleSystem.Stop();
+        
     }
 
     void Update()
@@ -26,5 +27,6 @@ public class Explosion : MonoBehaviour
     {
         particleSystem.Play();
         duration = particleSystem.duration;
+        FindObjectOfType<SFXHandler>().playSFX("explosion", 1f);
     }
 }
