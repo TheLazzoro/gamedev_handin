@@ -20,10 +20,40 @@ public class CarController : MonoBehaviour
     public Transform centerOfMass;
     private Rigidbody rigidbody;
 
+    private float upsideDownTimer;
+    private readonly float flipThreshold = 2f;
+
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = centerOfMass.localPosition;
+        upsideDownTimer = flipThreshold;
+    }
+
+    void Update()
+    {
+        // if car is upside down.
+        if (Vector3.Dot(transform.up, Vector3.down) > 0) 
+        {
+            RaycastHit hit;
+            float distance = 1f;
+            Vector3 targetLocation;
+            // if ray hits something below the car (the ground), start timer to flip.
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, distance)) 
+                upsideDownTimer -= Time.deltaTime;
+        }
+        else
+            upsideDownTimer = flipThreshold;
+
+        if (upsideDownTimer < 0) // flip car
+        {
+            upsideDownTimer = flipThreshold;
+            var up = new Vector3(0, 1, 0);
+            var rot = new Quaternion(0, 0, 0, 0);
+            transform.Translate(up);
+            transform.rotation = rot;
+        }
     }
 
 
