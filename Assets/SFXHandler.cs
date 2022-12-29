@@ -8,7 +8,7 @@ public class SFXHandler : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     void Update()
