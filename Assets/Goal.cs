@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity;
+using Cinemachine;
 
 public class Goal : MonoBehaviour
 {
@@ -66,5 +67,11 @@ public class Goal : MonoBehaviour
 
         // Find the actual ball and hide that (keep particles)
         GameObject.Find("Soccer Ball").SetActive(false);
+
+        // Activate Screen Shake
+        var cameras = FindObjectsOfType<CinemachineVirtualCamera>();
+        foreach (CinemachineVirtualCamera camera in cameras) {
+            camera.GetComponent<CameraShake>().Shake(15f, 0.08f);
+        }
     }
 }
