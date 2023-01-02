@@ -43,12 +43,12 @@ public class Goal : MonoBehaviour
         {
             if (SlowMotionTime_Left < 0)
             {
+                doSlowMotion = false;
                 Time.timeScale = 1;
                 Time.fixedDeltaTime = FixedDeltaTime;
             }
             else
             {
-                doSlowMotion = false;
                 SlowMotionTime_Left -= Time.deltaTime;
             }
         }
