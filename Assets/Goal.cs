@@ -15,6 +15,7 @@ public class Goal : MonoBehaviour
     bool activated;
     float pauseTime = 3f;
 
+    private static bool doSlowMotion;
     private static readonly float SlowMotionTime = 1;
     private static float SlowMotionTime_Left;
     private static float SlowDownFactor = 0.2f;
@@ -38,13 +39,19 @@ public class Goal : MonoBehaviour
             }
         }
 
-        if (SlowMotionTime_Left < 0)
+        if (doSlowMotion)
         {
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = FixedDeltaTime;
+            if (SlowMotionTime_Left < 0)
+            {
+                doSlowMotion = false;
+                Time.timeScale = 1;
+                Time.fixedDeltaTime = FixedDeltaTime;
+            }
+            else
+            {
+                SlowMotionTime_Left -= Time.deltaTime;
+            }
         }
-        else
-            SlowMotionTime_Left -= Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,6 +63,7 @@ public class Goal : MonoBehaviour
         FindObjectOfType<ScoreManager>().AddPointToTeam(gameObject.tag);
         FindObjectOfType<SFXHandler>().playSFX("goalAirhorn", 1f);
 
+        doSlowMotion = true;
         SlowMotionTime_Left = SlowMotionTime;
         Time.timeScale = SlowDownFactor;
         Time.fixedDeltaTime = SlowDownFactor * 0.02f;
