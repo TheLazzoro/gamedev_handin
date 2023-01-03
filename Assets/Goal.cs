@@ -54,10 +54,10 @@ public class Goal : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider obj)
     {
-        if (!activated || other.tag != "Ball") return;
-        var ball = other.GetComponent<Transform>();
+        if (!activated || obj.tag != "Ball") return;
+        var ball = obj.GetComponent<Transform>();
         activated = false; // TODO: Remember to re-activate the goal on round reset.
         Debug.Log("Scored a goal on " + teamName);
         FindObjectOfType<ScoreManager>().AddPointToTeam(gameObject.tag);
@@ -68,18 +68,22 @@ public class Goal : MonoBehaviour
         Time.timeScale = SlowDownFactor;
         Time.fixedDeltaTime = SlowDownFactor * 0.02f;
 
-        // Explosion
-        var ballEx = other.GetComponent<Explosion>();
-        ballEx.TriggerExplosion();
-        carYeeter.Yeet();
-
-        // Find the actual ball and hide that (keep particles)
+        // Find the actual ball, get the velocity and hide it (keep explosion particles)
         GameObject.Find("Soccer Ball").SetActive(false);
+        var ballBody = obj.GetComponent<Rigidbody>();
+        var ballSpeed = (ballBody.velocity.magnitude > 0) ? ballBody.velocity.magnitude : 0;
+        Debug.Log("Ball Speed: " + ballSpeed);
+
+        // Explosion
+        var ballEx = obj.GetComponent<Explosion>();
+        ballEx.TriggerExplosion();
+
+        carYeeter.Yeet(ballSpeed);
 
         // Activate Screen Shake
         var cameras = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (CinemachineVirtualCamera camera in cameras) {
-            camera.GetComponent<CameraShake>().Shake(15f, 0.08f);
+            camera.GetComponent<CameraShake>().Shake(ballSpeed*2, 0.08f);
         }
     }
 }

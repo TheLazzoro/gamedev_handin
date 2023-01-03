@@ -28,11 +28,11 @@ public class CarYeeter : MonoBehaviour
     /// <summary>
     /// Yeets all cars within the area away from the goal.
     /// </summary>
-    public void Yeet()
+    public void Yeet(float force)
     {
         foreach (var obj in affectedObjects)
-        {
-            obj.AddExplosionForce(OnScore_force, transform.position, OnScore_explosionRadius);
+        { //OnScore_force
+            obj.AddExplosionForce((float)force * 3000, transform.position, OnScore_explosionRadius);
             Debug.Log(obj.ToString());
         }
     }
