@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    
+    public int playerId;
+    private PlayerControls controls;
+
     private float horizontalInput;
     private float verticalInput;
     private float steeringAngle;
@@ -27,27 +29,85 @@ public class CarController : MonoBehaviour
 
     private float carSpeed = 0;
 
+    void Awake()
+    {
+        controls = new PlayerControls();
+        if (playerId == 1)
+        {
+            // WASD keys
+            controls.Player1.Move.performed += ctx =>
+            {
+                Vector2 v = ctx.ReadValue<Vector2>();
+                horizontalInput = v.x;
+                verticalInput = v.y;
+            };
+            controls.Player1.Move.canceled += ctx =>
+            {
+                horizontalInput = 0;
+                verticalInput = 0;
+            };
+        }
+        else if (playerId == 2)
+        {
+            // Arrow keys
+            controls.Player2.MoveArrowKeys.performed += ctx =>
+            {
+                Vector2 v = ctx.ReadValue<Vector2>();
+                horizontalInput = v.x;
+                verticalInput = v.y;
+            };
+            controls.Player2.MoveArrowKeys.canceled += ctx =>
+            {
+                horizontalInput = 0;
+                verticalInput = 0;
+            };
+
+            // Joystick/Gamepad controls
+            controls.Player2.Accelerate.performed += ctx => verticalInput = 1;
+            controls.Player2.Accelerate.canceled += ctx => verticalInput = 0;
+            controls.Player2.Reverse.canceled += ctx => verticalInput = 0;
+            controls.Player2.Reverse.performed += ctx => verticalInput = -1;
+            controls.Player2.TurnJoystick.performed += ctx =>
+            {
+                Vector2 v = ctx.ReadValue<Vector2>();
+                horizontalInput = v.x;
+            };
+            controls.Player2.TurnJoystick.canceled += ctx => horizontalInput = 0;
+        }
+    }
+
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = centerOfMass.localPosition;
         upsideDownTimer = flipThreshold;
-        
+
         audioSource.volume = 0.15f;
         audioSource.loop = true;
         audioSource.Play();
     }
 
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
     void Update()
     {
         // if car is upside down.
-        if (Vector3.Dot(transform.up, Vector3.down) > 0) 
+        if (Vector3.Dot(transform.up, Vector3.down) > 0)
         {
             RaycastHit hit;
             float distance = 1f;
             Vector3 targetLocation;
             // if ray hits something below the car (the ground), start timer to flip.
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, distance)) 
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, distance))
                 upsideDownTimer -= Time.deltaTime;
         }
         else
@@ -69,33 +129,32 @@ public class CarController : MonoBehaviour
         // and dividing by it to get a pitch change between 0 and 1.
         // Adding 1 due to it being the default pitch, meaning it goes between 1 and 2.
         var carCappedSpeed = carSpeed > 20 ? 20 : carSpeed;
-        audioSource.pitch = 1 + (carCappedSpeed/20);
+        audioSource.pitch = 1 + (carCappedSpeed / 20);
     }
 
-    public void GetInput()  {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-    }
-
-    private void Steer()    {
+    private void Steer()
+    {
         steeringAngle = maxSteerAngle * horizontalInput;
         FLWheel.steerAngle = steeringAngle;
         FRWheel.steerAngle = steeringAngle;
     }
 
-    private void Accelerate()   {
+    private void Accelerate()
+    {
         FLWheel.motorTorque = verticalInput * motorForce;
         FRWheel.motorTorque = verticalInput * motorForce;
     }
 
-    private void UpdateWheelPositions()   {
+    private void UpdateWheelPositions()
+    {
         UpdateWheelPosition(FLWheel, FLWheelT);
         UpdateWheelPosition(FRWheel, FRWheelT);
         UpdateWheelPosition(BLWheel, BLWheelT);
         UpdateWheelPosition(BRWheel, BRWheelT);
     }
 
-    private void UpdateWheelPosition(WheelCollider _collider, Transform _transform) {
+    private void UpdateWheelPosition(WheelCollider _collider, Transform _transform)
+    {
         Vector3 _pos = _transform.position;
         Quaternion _quat = _transform.rotation;
 
@@ -105,8 +164,8 @@ public class CarController : MonoBehaviour
         _transform.rotation = _quat;
     }
 
-    private void FixedUpdate()  {
-        GetInput();
+    private void FixedUpdate()
+    {
         Steer();
         Accelerate();
         UpdateWheelPositions();
