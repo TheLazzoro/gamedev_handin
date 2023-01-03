@@ -29,6 +29,9 @@ public class CarController : MonoBehaviour
 
     private float carSpeed = 0;
 
+    public Vector3 jump = new Vector3(0.0f, 2.0f, 0.0f);
+    public float jumpForce = 2.0f;
+
     void Awake()
     {
         controls = new PlayerControls();
@@ -46,6 +49,7 @@ public class CarController : MonoBehaviour
                 horizontalInput = 0;
                 verticalInput = 0;
             };
+            controls.Player1.Jump.performed += Jump_performed;
         }
         else if (playerId == 2)
         {
@@ -73,7 +77,25 @@ public class CarController : MonoBehaviour
                 horizontalInput = v.x;
             };
             controls.Player2.TurnJoystick.canceled += ctx => horizontalInput = 0;
+            controls.Player2.Jump.performed += Jump_performed;
         }
+    }
+
+    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        WheelHit hit; // we don't use this, but 'GetGroundHit' requires it.
+        bool[] isWheelGrounded = new bool[4];
+        isWheelGrounded[0] = FLWheel.GetGroundHit(out hit);
+        isWheelGrounded[1] = FRWheel.GetGroundHit(out hit);
+        isWheelGrounded[2] = BLWheel.GetGroundHit(out hit);
+        isWheelGrounded[3] = BRWheel.GetGroundHit(out hit);
+        for (int i = 0; i < isWheelGrounded.Length; i++)
+        {
+            if (!isWheelGrounded[i])
+                return;
+        }
+
+        rigidbody.AddForce(jump * jumpForce, ForceMode.Impulse);
     }
 
 
