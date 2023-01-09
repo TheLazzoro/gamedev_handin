@@ -9,11 +9,13 @@ To win you must score more goals than your opponent.
 ### Player 1:
 - Move: WASD
 - Jump: Spacebar
+- Ball Cam: Left Shift
 
 ### Player 2:
 #### Keyboard:
 - Move: Arrow keys
 - Jump: Enter
+- Ball Cam: Right Shift
 
 #### Playstation/Xbox controller:
 - Accelerate: R2
