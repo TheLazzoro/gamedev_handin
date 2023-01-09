@@ -75,7 +75,7 @@ public class CameraSwitcher : MonoBehaviour
             }
         }
 
-        // Player 2 uses Left Shift to toggle BallCam
+        // Player 2 uses Right Shift to toggle BallCam
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
             foreach (PlayerCameraClass camClass in cameraList)
